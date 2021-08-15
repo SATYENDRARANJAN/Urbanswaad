@@ -97,14 +97,13 @@ WSGI_APPLICATION = 'urbanswaad_backend.wsgi.application'
 #     }
 # }
 
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'cherie_db',
-        'USER': 'cherie',
-        'PASSWORD': 'cherie2020',
-        'HOST': 'cheriedb.cize88mdu30o.ap-south-1.rds.amazonaws.com',
+        'NAME': 'urbanswaad_db',
+        'USER': 'urbanswaad',
+        'PASSWORD': 'urbanswaad',
+        'HOST': 'urbanswaad.cize88mdu30o.ap-south-1.rds.amazonaws.com',
         'PORT': '5432',
     }
 }
