@@ -166,7 +166,7 @@ class UserAddress(models.Model):
 
 class PhoneOTP(models.Model):
     user = models.OneToOneField(User,to_field='id',on_delete=models.CASCADE)
-    otp = models.IntegerField(max_length=6,null=True)
+    otp = models.IntegerField(null=True)
 
 
 class UserLeads(models.Model):
