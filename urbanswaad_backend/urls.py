@@ -23,4 +23,3 @@ urlpatterns = [
     path('payment/',include('payment.urls')),
 
 ]
-2
