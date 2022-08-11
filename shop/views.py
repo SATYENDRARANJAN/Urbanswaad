@@ -309,3 +309,12 @@ def search(request):
         results=getSearchResults(key)
     serializer= ProductSerializer(results,many=True)
     return Response(data=serializer.data,status=status.HTTP_200_OK)
+
+
+@api_view(["GET"])
+@permission_classes([AllowAny])
+def update_category(request) :
+    from shop.models import SubCategory
+    subcategory_list = ['urban_cheesy','urban_glory','urban_veggie','urban_double','urban_premium','urban_treat','urban_achari','urban_delight','urban_hot','urban_spicy','urban_paneer_pappy','urban_makhani','urban_chilly','urban_tangy','urban_paneer_angara','urban_green_chiily_corn','urban_spicy_delight','urban_tandoori','urban_wonder','urban_loaded','urban_supreme','urban_spicy_paneer','urban_spicy_twist','urban_tandoori_tomato','urban_green','extra_topping_cheese','urban_achari_popey','urban_margeta','urban_king_burger','urban_queen_burger','urban_chief_burger','urban_paneer_burger','urban_tandoori_paneer_burger','stuff_garlic_bread','corn_sandwich','cheese_sandwich','pizza_sandwich','veg_cheese_sandwich','paneer_sandwich','cheese_corn_sandwich','tasty_treat_white_pasta','tasty_treat_red_pasta','mix_pasta','paneer_maggi','cheese_maggi','corn_maggi','mix_veg_maggi','momo_veg_10_pcs','momo_veg_dry_10_pcs','veg_roll_2_pcs','paneer_roll_2_pcs','springroll_2_pcs','soya_pizza','onion','capsicum','tomato','golden_corn','soya_onion_pizza','capsicum_tomato','golden_corn_capsicum','tomato_onion','onion_paneer_','onion_capsicum','veg_pocket_calzone','garlic_bread_sticks','french_fries_s','french_fries_m','cheesy_dip','cheese_garlic_bread','zingy_parcel_veg','chocolava_cake','milk_chocolate','dry_fruits_chocolate','hazel_nut_chocolate','nutella_filling_chocolate','choco_chips_chocolate','white_chocolate','cherie_shine','cherie_hearts','cherie_queen','cherie_forever','cherie_luck','cherie_5-star','cherie_chocbar','cherie_ecstacy'];
+    for sc in subcategory_list:
+        SubCategory.objects.create(subcategory_name=sc, category_id=13)

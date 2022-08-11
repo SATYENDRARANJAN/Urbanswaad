@@ -8,6 +8,8 @@ from phonenumber_field.modelfields import PhoneNumberField
 from users.models import User
 
 class Tags(models.Model):
+    RAKSHABANDHAN='rakshabandhan'
+    INDEPENDENCE_DAY='independence_day'
     BIRTHDAY = 'birthday'
     ANNIVERSARY = 'anniversary'
     HOLI = 'holi'
@@ -18,7 +20,7 @@ class Tags(models.Model):
     PRESENTS = "presents"
     ALL="all"
 
-    TAGS = (
+    TAGS = ((RAKSHABANDHAN,RAKSHABANDHAN),(INDEPENDENCE_DAY,INDEPENDENCE_DAY),
     (BIRTHDAY, BIRTHDAY), (ANNIVERSARY, ANNIVERSARY), (HOLI, HOLI), (WEDDINGS, WEDDINGS), (FRIENDSHIP, FRIENDSHIP),
     (FLOWERS, FLOWERS), (CHOCOLATES, CHOCOLATES), (PRESENTS, PRESENTS),(ALL,ALL))
     tag_name = models.CharField(max_length=200,choices=TAGS,default=ALL)
@@ -45,6 +47,8 @@ class SubCategory(models.Model):
 
 
 class Products(models.Model):
+    RAKSHABANDHAN='rakshabandhan'
+    INDEPENDENCE_DAY='independence_day'
     BIRTHDAY='birthday'
     ANNIVERSARY='anniversary'
     HOLI='holi'
@@ -54,7 +58,7 @@ class Products(models.Model):
     CHOCOLATES="chocolates"
     PRESENTS="presents"
     ALL="all"
-    TAGS =((BIRTHDAY,BIRTHDAY),(ANNIVERSARY,ANNIVERSARY),(HOLI,HOLI),(WEDDINGS,WEDDINGS),(FRIENDSHIP,FRIENDSHIP),(FLOWERS,FLOWERS),(CHOCOLATES,CHOCOLATES),(PRESENTS,PRESENTS),(ALL,ALL))
+    TAGS =((RAKSHABANDHAN,RAKSHABANDHAN),(INDEPENDENCE_DAY,INDEPENDENCE_DAY),(BIRTHDAY,BIRTHDAY),(ANNIVERSARY,ANNIVERSARY),(HOLI,HOLI),(WEDDINGS,WEDDINGS),(FRIENDSHIP,FRIENDSHIP),(FLOWERS,FLOWERS),(CHOCOLATES,CHOCOLATES),(PRESENTS,PRESENTS),(ALL,ALL))
     product_id = models.AutoField(primary_key=True, editable=False)
     product_name = models.CharField(max_length=100)
     product_slug = models.CharField(max_length=100)
@@ -65,7 +69,7 @@ class Products(models.Model):
     subcategory = models.ForeignKey(SubCategory,related_name='products',on_delete=models.SET_NULL,blank=True,null = True)
     short_code = models.CharField(max_length=100)
     care_info = models.CharField(max_length=100,null=True)
-    description = models.CharField(max_length=100,null=True)
+    description = models.CharField(max_length=300,null=True)
     price = models.PositiveIntegerField()
     is_active = models.BooleanField(default=True)
     taglist = models.ManyToManyField(Tags,related_name='products')

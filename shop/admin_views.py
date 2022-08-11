@@ -3,13 +3,18 @@ from rest_framework.decorators import api_view, permission_classes
 from django.shortcuts import render
 import openpyxl
 from rest_framework.permissions import AllowAny
+from rest_framework.response import Response
+from rest_framework import exceptions, status
 
-from shop.models import Products, Tags, Category, SubCategory
+
+
 
 
 @api_view(['GET','POST'])
 @permission_classes([AllowAny,])
 def productUpload(request):
+    from shop.models import Products, Tags, Category, SubCategory
+
     if "GET" == request.method:
         return render(request, 'product_upload.html', {})
     else:
@@ -26,6 +31,8 @@ def productUpload(request):
         # iterating over the rows and
         # getting value from each cell in row
         for row in worksheet.iter_rows():
+
+
             if row[0].value == 'product_name' :
                 continue
             if row[0].value == 'ENDLIST--------@CHERIE -DO NOT DELETE THIS':
@@ -38,6 +45,16 @@ def productUpload(request):
             if product_obj.exists():
                 not_added_list.append(row_data)
                 continue
+
+            sc=None
+            category_id =int(row_data[5])
+            if type(row_data[6]) == int:
+                sc = SubCategory.objects.filter(id=int(row_data[6]))
+                return Response("error", status=status.HTTP_200_OK)
+            if type(row_data[6]) == str:
+                sc = SubCategory.objects.filter(subcategory_name=row_data[6])
+                if len(sc)==0 :
+                    SubCategory.objects.create(subcategory_name=row_data[6],category_id=category_id)
             product_obj = Products.objects.create(
                 product_name = row_data[0],
                 product_slug = row_data[1] ,
@@ -45,7 +62,7 @@ def productUpload(request):
                 heading = row_data[3] ,
                 subtxt = row_data[4],
                 category = Category.objects.get(id=int(row_data[5])) ,
-                subcategory = SubCategory.objects.get(id=int(row_data[6])),
+                subcategory = SubCategory.objects.get(subcategory_name= (row_data[6])),
                 short_code = row_data[7] ,
                 care_info = row_data[8],
                 description = row_data[9],

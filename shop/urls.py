@@ -2,7 +2,7 @@ from django.urls import path
 
 from shop import views, admin_views
 from shop.views import ProductViewSet, DeliveryInfoViewSet, addToCart, getCartDetails, removeFromCart, createOrder, \
-    DeliveryAddressViewSet, placeOrder, getTagsAndProducts, getTags, search
+    DeliveryAddressViewSet, placeOrder, getTagsAndProducts, getTags, search,update_category
 
 product_list = ProductViewSet.as_view({
     'get':'list',
@@ -67,5 +67,6 @@ urlpatterns = [
     path('get_tags/', getTags),
     path('search/', search),
     path('product_upload', admin_views.productUpload, name='product-upload'),
+    path('update_category/', update_category),
 
 ]
