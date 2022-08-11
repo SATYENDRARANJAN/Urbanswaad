@@ -9,7 +9,7 @@ from payment.models import Transaction
 from shop.models import Products, OrderProduct
 from users.models import User
 
-from payment.constants import RAZORPAY_TEST_KEY,RAZORPAY_TEST_SECRET
+from payment.constants import RAZORPAY_TEST_KEY,RAZORPAY_TEST_SECRET,RAZORPAY_PROD_KEY,RAZORPAY_PROD_SECRET
 
 
 def create_transaction(request):
@@ -30,7 +30,7 @@ class Razorpay():
     def __init__(self):
         import razorpay
 
-        self.client = razorpay.Client(auth = (RAZORPAY_TEST_KEY, RAZORPAY_TEST_SECRET))
+        self.client = razorpay.Client(auth = (RAZORPAY_PROD_KEY, RAZORPAY_PROD_SECRET))
 
     def create_order(self,amount,transaction_id,shipping_address):
         order_amount = amount
@@ -42,7 +42,7 @@ class Razorpay():
 
     def get_options(self,order_amount,order_id,username=None,email=None,contact=None,user_address=None):
         options = {
-                    "key": RAZORPAY_TEST_KEY,
+                    "key": RAZORPAY_PROD_KEY,
                     "amount": order_amount,
                     "currency": "INR",
                     "name": "@hiCherie !",
