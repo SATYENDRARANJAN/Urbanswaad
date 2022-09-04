@@ -31,7 +31,7 @@ class ProductViewSet(viewsets.ViewSet):
         return Response(data={'products':serializer.data},status=status.HTTP_201_CREATED)
 
     def list_by_tag(self,request,tag):
-        queryset = Products.objects.all().filter(taglist__tag_name__in=[tag])
+        queryset = Products.objects.all().filter(taglist__tag_name__in=[tag],is_active=True)
         serializer = ProductSerializer(queryset,many=True)
         return Response(data={'products':serializer.data},status=status.HTTP_201_CREATED)
 
