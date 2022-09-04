@@ -45,8 +45,8 @@ class Razorpay():
                     "key": RAZORPAY_PROD_KEY,
                     "amount": order_amount,
                     "currency": "INR",
-                    "name": "@hiCherie !",
-                    "description": "Cherie Transaction",
+                    "name": "@UrbanSwad !",
+                    "description": "UrbanSwad Transaction",
                     "image": "https://s3.ap-south-1.amazonaws.com/hicherie.in/CHERIE_LOGO.png",
                     "order_id": order_id,
                     "prefill": {
